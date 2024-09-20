@@ -1,0 +1,6 @@
+imgkit==1.2.2
+Pillow==10.0.0
+IPython==8.14.0
+Jinja2==3.1.2
+google-cloud-texttospeech==2.15.1
+moviepy==1.0.3 

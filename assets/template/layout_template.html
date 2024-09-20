@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Image</title>
+    <!-- Include Local Fonts -->
+    <style>
+        /* @font-face {
+            font-family: 'Poppins';
+            src: url('file:///home/marotta/projects/youtube/quiz-generator/fonts/Poppins-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Poppins';
+            src: url('file:///home/marotta/projects/youtube/quiz-generator/fonts/Poppins-Bold.ttf') format('truetype');
+            font-weight: 600;
+        } */
+
+
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #333;
+            display: table;
+            width: 1920px;
+            height: 1080px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .quiz-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 60px;
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: table;
+            margin: 0 auto;
+            margin-top: 75px!important;
+        }
+
+        .question-number {
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            font-size: 32px;
+            font-weight: 600;
+            text-align: center;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            display: table-cell;
+            vertical-align: top;
+        }
+
+        .header {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .options {
+            display: block;
+            padding: 0 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: #f7f7f7;
+            color: #333;
+            padding: 30px;
+            margin-top: 25px;
+            font-size: 24px;
+            border-radius: 15px;
+            display: table;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-correct {
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            color: #333;
+            padding: 30px;
+            margin-top: 25px;
+            font-size: 24px;
+            border-radius: 15px;
+            display: table;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-letter {
+            background-color: #ff6b6b;
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-text {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        /* Progress Bar Styles */
+        .progress-bar-container {
+            width: 20px;
+            height: 100%;
+            background: #e0e0e0;
+            border-radius: 10px;
+            position: absolute;
+            right: -40px;
+            top: 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: [[ progress_percentage | default(0)]]%;
+            background: linear-gradient(180deg, #28a745, #218838);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-radius: 10px;
+        }
+
+        /* Decorative Elements */
+        .background-pattern {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .background-pattern-left {
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <div class="background-pattern"></div>
+        <div class="background-pattern-left"></div>
+        <div class="question-number">[[ question_number ]]</div>
+        <div class="content">
+            <!-- Question Title -->
+            <div class="header">[[ question_title ]]</div>
+
+            <!-- Options -->
+            {% if answers_html %}
+            <div class="options">
+                [[ answers_html | safe ]]
+            </div>
+            {% endif %}
+        </div>
+        <!-- Progress Bar -->
+        {% if progress_percentage is not none %}
+        <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
