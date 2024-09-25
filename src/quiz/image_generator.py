@@ -2,7 +2,7 @@ import imgkit
 import os
 from commons.template_processor import generate_html_from_template  # Importing the HTML generation function
 
-def generate_quiz_image(parameters):
+def generate_quiz_image(parameters, output_dir):
     """
     Generates a quiz image based on the parameters provided.
 
@@ -13,9 +13,9 @@ def generate_quiz_image(parameters):
     question_title = parameters.get('question_title', '')
     answers = parameters.get('answers', [])
     question_number = parameters.get('question_number', '')
-    output_image_path = parameters.get('output_image_path', '../temp/img/quiz_image.png')
+    output_image_path = parameters.get('output_image_path')
     correct_answer_index = parameters.get('correct_answer_index', None)
-    layout_template_path = parameters.get('layout_template_path', "../../assets/template/layout_template.html")
+    layout_template_path = parameters.get('layout_template_path')
     progress_percentage = parameters.get('progress_percentage')
 
     # Generate dynamic answers HTML
@@ -45,7 +45,7 @@ def generate_quiz_image(parameters):
     }
 
     # Ensure the output directory exists
-    output_html_path = "../../temp/html/quiz_template_final.html"
+    output_html_path = os.path.join(output_dir, 'html/quiz_template_final.html')
     os.makedirs(os.path.dirname(output_html_path), exist_ok=True)
 
     # Generate HTML using the generate_html_from_template function
@@ -57,17 +57,11 @@ def generate_quiz_image(parameters):
 
     print(f"Generated HTML at: {output_html_path}")
 
-    # Open and print the content of the HTML file for debugging
-    with open(output_html_path, 'r', encoding='utf-8') as f:
-        html_content = f.read()
-        print("Generated HTML Content:")
-        print(html_content)
-
     # Options for imgkit to handle CSS and set image size
     options = {
         'format': 'png',
-        'width': 1920,
-        'height': 1080,
+        'width': 1080,
+        'height': 1920,
         'encoding': "UTF-8",
         'enable-local-file-access': '',
     }

@@ -1,5 +1,21 @@
 from moviepy.editor import *
 import os
+import re
+
+def numerical_sort(value):
+    """ Helper function to sort filenames numerically """
+    numbers = re.findall(r'\d+', value)
+    return int(numbers[0]) if numbers else 0
+
+import os
+import re
+
+def numerical_sort(value):
+    """ Helper function to sort filenames numerically """
+    # Extract numbers from the filename using a regular expression
+    numbers = re.findall(r'\d+', os.path.basename(value))
+    # Convert the first found number to an integer for sorting
+    return int(numbers[0]) if numbers else 0
 
 def create_question_video(temp_dir, output_video_path, image_duration=0.25):
     """
@@ -11,7 +27,13 @@ def create_question_video(temp_dir, output_video_path, image_duration=0.25):
     question_images_dir = os.path.join(temp_dir, "question/img")
     
     # Load all images from the question's directory in sequence.
-    question_images = sorted([os.path.join(question_images_dir, img) for img in os.listdir(question_images_dir) if img.endswith(".png")])
+    question_images = sorted(
+        [os.path.join(question_images_dir, img) for img in os.listdir(question_images_dir) if img.endswith(".png")],
+        key=numerical_sort
+    )
+
+    print("Question images:")
+    print(question_images)
 
     # Load the audio file for the question.
     question_audio = AudioFileClip(question_audio_path)
@@ -103,7 +125,7 @@ def create_correct_answer_video(temp_dir, output_video_path, image_duration=5):
     correct_clip = correct_image.set_audio(correct_audio)
     correct_clip.write_videofile(output_video_path, fps=24)
 
-def create_all_videos(temp_dir, output_dir):
+def create_all_videos(temp_dir, assets_dir, output_dir):
     """
     Generate all the videos: question, options, timer, and correct answer.
     """
@@ -122,7 +144,7 @@ def create_all_videos(temp_dir, output_dir):
 
     # Generate the timer video.
     timer_video_path = os.path.join(output_dir, "timer_video.mp4")
-    audio_path = "../assets/mp3/clock.wav"  # Add the correct audio path here.
+    audio_path = os.path.join(assets_dir, "mp3/clock.wav")  # Add the correct audio path here.
     create_timer_video(temp_dir, audio_path, timer_video_path)
     print(f"Timer video created: {timer_video_path}")
 

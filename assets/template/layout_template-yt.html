@@ -16,7 +16,8 @@
             font-family: 'Poppins';
             src: url('file:///home/marotta/projects/youtube/quiz-generator/assets/fonts/Poppins-Bold.ttf') format('truetype');
             font-weight: 600;
-        }
+        } 
+
 
         /* Reset and Base Styles */
         * {
@@ -30,41 +31,39 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: #333;
             display: table;
-            width: 1080px;
-            height: 1920px;
+            width: 1920px;
+            height: 1080px;
             margin: 0;
             padding: 0;
             overflow: hidden;
         }
 
         .quiz-container {
+            background: #fff;
             border-radius: 20px;
             padding: 60px;
             width: 90%;
-            max-width: 900px;
+            max-width: 1000px;
             text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             position: relative;
             display: table;
             margin: 0 auto;
-        }
-
-        .quiz-container-background {
-            background: #fff;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin-top: 75px!important;
         }
 
         .question-number {
             background-color: #ff6b6b;
             color: white;
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            line-height: 100px;
-            font-size: 40px;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            font-size: 32px;
             font-weight: 600;
             text-align: center;
             position: absolute;
-            top: -50px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -76,7 +75,7 @@
         }
 
         .header {
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 600;
             margin-bottom: 40px;
             color: #333;
@@ -84,7 +83,7 @@
 
         .options {
             display: block;
-            padding: 0 0px;
+            padding: 0 20px;
             margin-top: 30px;
             margin-bottom: 30px;
         }
@@ -92,9 +91,9 @@
         .option {
             background: #f7f7f7;
             color: #333;
-            padding: 40px;
+            padding: 30px;
             margin-top: 25px;
-            font-size: 32px;
+            font-size: 24px;
             border-radius: 15px;
             display: table;
             width: 100%;
@@ -105,9 +104,9 @@
             background-color: #d4edda;
             border: 2px solid #28a745;
             color: #333;
-            padding: 40px;
+            padding: 30px;
             margin-top: 25px;
-            font-size: 32px;
+            font-size: 24px;
             border-radius: 15px;
             display: table;
             width: 100%;
@@ -117,11 +116,11 @@
         .option-letter {
             background-color: #ff6b6b;
             color: white;
-            width: 70px;
-            height: 70px;
-            line-height: 70px;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
             border-radius: 50%;
-            font-size: 26px;
+            font-size: 20px;
             font-weight: 600;
             text-align: center;
             display: table-cell;
@@ -138,42 +137,24 @@
 
         /* Progress Bar Styles */
         .progress-bar-container {
-            background: #fff;
-            border-radius: 20px;
-            padding: 35px;
-            width: 90%;
-            max-width: 900px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            position: relative;
-            display: table;
-            margin: 0 auto;
-            margin-top: 60px !important;
+            width: 20px;
+            height: 100%;
+            background: #e0e0e0;
+            border-radius: 10px;
+            position: absolute;
+            right: -40px;
+            top: 0;
+            overflow: hidden;
         }
 
         .progress-bar {
-            width: [[ progress_percentage | default(0)]]%;
-            height: 40px;
-            background: linear-gradient(90deg, #28a745, #218838);
-            position: relative;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: width 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .progress-bar-container[data-progress="100"] .progress-bar {
-            background-color: #ffd700;
-            /* Dourado quando em 100% */
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.8);
-        }
-
-        .progress-counter {
+            width: 100%;
+            height: [[ progress_percentage | default(0)]]%;
+            background: linear-gradient(180deg, #28a745, #218838);
             position: absolute;
-            top: 0px;
-            right: 25px;
-            font-size: 26px;
-            font-weight: 600;
-            color: #333;
+            bottom: 0;
+            left: 0;
+            border-radius: 10px;
         }
 
         /* Decorative Elements */
@@ -181,8 +162,8 @@
             position: absolute;
             top: -50px;
             right: -50px;
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
         }
@@ -191,8 +172,8 @@
             position: absolute;
             bottom: -50px;
             left: -50px;
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
         }
@@ -200,27 +181,28 @@
 </head>
 
 <body>
-    <div class="quiz-container quiz-container-background" style="margin-top: 250px !important">
+    <div class="quiz-container">
         <div class="background-pattern"></div>
         <div class="background-pattern-left"></div>
         <div class="question-number">[[ question_number ]]</div>
-        <!-- Question Title -->
-        <div class="header">[[ question_title ]]</div>
-    </div>
+        <div class="content">
+            <!-- Question Title -->
+            <div class="header">[[ question_title ]]</div>
 
-    {% if answers_html %}
-    <div class="options quiz-container content" style="margin-top: 20px !important">
-        [[ answers_html | safe ]]
+            <!-- Options -->
+            {% if answers_html %}
+            <div class="options">
+                [[ answers_html | safe ]]
+            </div>
+            {% endif %}
+        </div>
+        <!-- Progress Bar -->
+        {% if progress_percentage is not none %}
+        <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
-
-    <!-- Progress Bar -->
-    {% if progress_percentage is not none %}
-    <div class="progress-bar-container" data-progress="[[ progress_percentage ]]">
-        <div class="progress-counter">[[ progress_percentage ]]%</div>
-        <div class="progress-bar"></div>
-    </div>
-    {% endif %}
 </body>
 
 </html>
