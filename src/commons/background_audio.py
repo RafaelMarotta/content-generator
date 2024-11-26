@@ -49,7 +49,7 @@ def add_background_music(video_path, music_path, output_path, music_volume=0.3):
             audio_codec='aac',         # Audio codec
             temp_audiofile='temp-audio.m4a',  # Temporary audio file
             remove_temp=True,          # Remove temporary files after processing
-            threads=4,                 # Number of threads for processing
+            threads=1,                 # Number of threads for processing
             preset='medium'            # Encoding preset (balance between speed and quality)
         )
         print("Export completed successfully!")
