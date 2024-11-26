@@ -64,7 +64,7 @@ def generate_video_for_single_question(question_data, template, video_title):
     return output_video_path
 
 
-def generate_videos_for_questions_in_parallel(data, max_threads=1):
+def generate_videos_for_questions_in_parallel(data, max_threads=4):
     video_paths = []
 
     # Use ThreadPoolExecutor with a max thread limit
