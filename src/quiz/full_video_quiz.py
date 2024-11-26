@@ -64,13 +64,16 @@ def generate_video_for_single_question(question_data, template, video_title):
     return output_video_path
 
 
-def generate_videos_for_questions_in_parallel(data):
+def generate_videos_for_questions_in_parallel(data, max_threads=1):
     video_paths = []
 
-    # Use ThreadPoolExecutor to generate videos in parallel
-    with ThreadPoolExecutor() as executor:
+    # Use ThreadPoolExecutor with a max thread limit
+    with ThreadPoolExecutor(max_workers=max_threads) as executor:
         # Submit each video generation task to the executor
-        future_to_question = {executor.submit(generate_video_for_single_question, question, data['template'], data['title']): question for question in data['questions']}
+        future_to_question = {
+            executor.submit(generate_video_for_single_question, question, data['template'], data['title']): question
+            for question in data['questions']
+        }
         
         for future in future_to_question:
             try:
@@ -110,9 +113,10 @@ def generate_video(data):
 
     final_output_video_path = os.path.join(output_dir, f"{safe_title}.mp4")
     join_all_generated_videos(generated_video_paths, final_output_video_path)
+    join_all_generated_videos(generated_video_paths, os.path.join(output_dir, f"{safe_title}-copy.mp4"))
 
     music_path = os.path.join(assets_dir, "mp3/background-sound.mp3")
     # Step 4: Add background music
-    background_audio.add_background_music(video_path=final_output_video_path, 
+    background_audio.add_background_music(video_path=os.path.join(output_dir, f"{safe_title}-copy.mp4"), 
                          music_path=music_path,
                          output_path=final_output_video_path)
