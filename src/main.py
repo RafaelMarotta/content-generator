@@ -9,7 +9,7 @@ from quiz import full_video_quiz
 import collections.abc  # Corrige o erro do AttributeError
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000", "https://video-generator-front-git-main-rafaelmarottas-projects.vercel.app"]}})
+CORS(app)
 
 @app.route('/generate-video', methods=['POST'])
 def generate_video():
