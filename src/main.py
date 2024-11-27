@@ -13,7 +13,8 @@ CORS(app, resources={r"/*": {"origins": [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://13.58.206.126:3000",
-    "https://video-generator-front.vercel.app"
+    "https://video-generator-front.vercel.app",
+    "https://generate-video.duckdns.org"
 ]}})
 
 @app.route('/generate-video', methods=['POST'])
